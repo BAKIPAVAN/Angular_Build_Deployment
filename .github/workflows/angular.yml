@@ -23,6 +23,6 @@ jobs:
       - name: Install Dependencies
         run: npm install
       - name: Run test
-        run: ng test:ci
+        run: npm run test:ci
       - name: Build
         run: npm run build
