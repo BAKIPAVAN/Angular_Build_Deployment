@@ -29,7 +29,7 @@ jobs:
       - name:  Build & push Docker image
         uses: mr-smithers-excellent/docker-build-push@v5
         with:
-         image: pavanbaki/springboot_build_deployment_01
+         image: pavanbaki/angular_build_deployment
          tags: latest
          registry: docker.io
          dockerfile: Dockerfile
