@@ -26,12 +26,18 @@ jobs:
       #   run: npm run test:ci
       # - name: Build
       #   run: npm run build
-      - name:  Build & push Docker image
-        uses: mr-smithers-excellent/docker-build-push@v5
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
         with:
-         image: pavanbaki/angular_build_deployment
-         tags: latest
-         registry: docker.io
-         dockerfile: Dockerfile
-         username: ${{ secrets.DOCKER_USERNAME }}
-         password: ${{ secrets.DOCKER_PASSWORD }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: angular_build_deployment/project03:${{ github.sha }}
